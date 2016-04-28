@@ -15,8 +15,8 @@ import org.restlet.resource.ClientResource;
  */
 public class Requestor {
 
-    public static final String USERS = "http://localhost:8080/users";
-    public static final String PERSONS = "http://localhost:8080/persons";
+    public static final String USERS = "http://localhost:8080/user";
+    public static final String PERSONS = "http://localhost:8080/person";
 
     public String get(String url) throws IOException {
         ClientResource cli = new ClientResource(url);
@@ -41,7 +41,8 @@ public class Requestor {
     }
 
     public String put(String url, String data) throws IOException {
-        ClientResource cli = new ClientResource(url);
+        Gson gson = new GsonBuilder().create();
+        ClientResource cli = new ClientResource(url + "/" + gson.fromJson(data, Query.class).getKey());
         StringRepresentation representation = new StringRepresentation(data, MediaType.APPLICATION_ALL_JSON);
         Representation put = cli.put(representation);
         return put.getText();

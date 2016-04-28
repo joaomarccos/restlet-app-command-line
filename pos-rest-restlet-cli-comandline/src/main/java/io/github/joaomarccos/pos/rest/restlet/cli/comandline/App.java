@@ -40,8 +40,9 @@ public class App {
     private static void getHelper() {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("App\n\n <arg> - Um texto no formato Json. Exemplos:\n--delete {key:value} --type [json_person|"
-                + "json_user]\n--insert|update {...} --type "
-                + "[json_person|json_user]\n--select{key:value} --type[json_person|json_user]\n\n", getOptions());
+                + "json_user]\n--insert {...} --type "
+                + "json_user]\n--update {key:value, ...} --type [json_person|json_user] (Não é possivel atualizar o codígo, afim de garantir unicidade)\n"
+                + "\n--select{key:value} --type[json_person|json_user]\n\n", getOptions());
     }
 
     private static String checkCommands(CommandLine line) throws ParseException, IOException {
@@ -49,6 +50,7 @@ public class App {
 
         if (line.hasOption(HELP)) {
             getHelper();
+            return "";
         }
         if (line.hasOption(INSERT) && line.hasOption(TYPE)) {
 
@@ -98,8 +100,7 @@ public class App {
         try {
             CommandLineParser parser = new DefaultParser();
             CommandLine line = parser.parse(getOptions(), args);
-            System.out.println("----------------- Result -------------------\n\n"
-                    +checkCommands(line) + "\n");           
+            System.out.println("\n" + checkCommands(line) + "\n");
         } catch (ParseException exp) {
             System.out.println("Unexpected exception:" + exp.getMessage());
         } catch (IOException ex) {
