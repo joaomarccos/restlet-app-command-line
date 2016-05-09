@@ -26,7 +26,7 @@ public class UserFilterResource extends ServerResource {
         String code = (String) getRequest().getAttributes().get("code");
         return new StringRepresentation(JsonConverter.convertToJson(DaoFactory.
                 createUserDao().buscar(code, User.class)),
-                MediaType.APPLICATION_ALL_JSON);
+                MediaType.TEXT_JAVASCRIPT);
 
     }
 
@@ -39,9 +39,9 @@ public class UserFilterResource extends ServerResource {
             dao.atualizar(user);
         } catch (Exception ex) {
             Logger.getLogger(UserResource.class.getName()).log(Level.SEVERE, null, ex);
-            return new StringRepresentation(Results.ERROR.json(), MediaType.APPLICATION_ALL_JSON);
+            return new StringRepresentation(Results.ERROR.json(), MediaType.TEXT_JAVASCRIPT);
         }
-        return new StringRepresentation(Results.SUCCESS.json(), MediaType.APPLICATION_ALL_JSON);
+        return new StringRepresentation(Results.SUCCESS.json(), MediaType.TEXT_JAVASCRIPT);
     }
 
     private User mountUser(User u, String newInfoJson) {
@@ -60,9 +60,9 @@ public class UserFilterResource extends ServerResource {
             dao.excluir(user);
         } else {
             return new StringRepresentation(Results.ERROR.json(),
-                    MediaType.APPLICATION_ALL_JSON);
+                    MediaType.TEXT_JAVASCRIPT);
         }
         return new StringRepresentation(Results.SUCCESS.json(),
-                MediaType.APPLICATION_ALL_JSON);
+                MediaType.TEXT_JAVASCRIPT);
     }
 }

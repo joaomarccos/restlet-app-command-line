@@ -25,9 +25,9 @@ public class UserResource extends ServerResource {
             DaoFactory.createUserDao().salvar(JsonConverter.convertToUser(data));
         } catch (Exception ex) {
             Logger.getLogger(UserResource.class.getName()).log(Level.SEVERE, null, ex);
-            return new StringRepresentation(Results.ERROR.json(), MediaType.APPLICATION_ALL_JSON);
+            return new StringRepresentation(Results.ERROR.json(), MediaType.TEXT_JAVASCRIPT);
         }
-        return new StringRepresentation(Results.SUCCESS.json(), MediaType.APPLICATION_ALL_JSON);
+        return new StringRepresentation(Results.SUCCESS.json(), MediaType.TEXT_JAVASCRIPT);
     } 
 
     @Get
@@ -35,10 +35,10 @@ public class UserResource extends ServerResource {
         try {            
             return new StringRepresentation(JsonConverter.convertToJson(
                     DaoFactory.createUserDao().consultaLista("user.all", null)),
-                    MediaType.APPLICATION_ALL_JSON);
+                    MediaType.TEXT_JAVASCRIPT);
         } catch (Exception ex) {
             Logger.getLogger(UserResource.class.getName()).log(Level.SEVERE, null, ex);
-            return new StringRepresentation(Results.ERROR.json(), MediaType.APPLICATION_ALL_JSON);
+            return new StringRepresentation(Results.ERROR.json(), MediaType.TEXT_JAVASCRIPT);
         }
     }
 }

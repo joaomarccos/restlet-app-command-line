@@ -24,10 +24,10 @@ public class PersonFilterResource extends ServerResource {
     @Get
     public StringRepresentation findByCode() {
         String code = (String) getRequest().getAttributes().get("code");
-
+        
         return new StringRepresentation(JsonConverter.convertToJson(DaoFactory.
                 createPersonDao().buscar(code, Person.class)),
-                MediaType.APPLICATION_ALL_JSON);
+                MediaType.TEXT_JAVASCRIPT);
 
     }
 
@@ -40,9 +40,9 @@ public class PersonFilterResource extends ServerResource {
             dao.atualizar(person);
         } catch (Exception ex) {
             Logger.getLogger(PersonResource.class.getName()).log(Level.SEVERE, null, ex);
-            return new StringRepresentation(Results.ERROR.json(), MediaType.APPLICATION_ALL_JSON);
+            return new StringRepresentation(Results.ERROR.json(), MediaType.TEXT_JAVASCRIPT);
         }
-        return new StringRepresentation(Results.SUCCESS.json(), MediaType.APPLICATION_ALL_JSON);
+        return new StringRepresentation(Results.SUCCESS.json(), MediaType.TEXT_JAVASCRIPT);
     }
 
     private Person mountPerson(Person p, String newInfoJson) {
@@ -61,10 +61,10 @@ public class PersonFilterResource extends ServerResource {
             dao.excluir(person);
         } else {
             return new StringRepresentation(Results.ERROR.json(),
-                    MediaType.APPLICATION_ALL_JSON);
+                    MediaType.TEXT_JAVASCRIPT);
         }
         return new StringRepresentation(Results.SUCCESS.json(),
-                MediaType.APPLICATION_ALL_JSON);
+                MediaType.TEXT_JAVASCRIPT);
     }
 
 }
